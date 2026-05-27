@@ -1676,10 +1676,31 @@ jobs:
         run: |
           echo "value=${{ env.ZRAM_ALGO_U && format('_{0}', env.ZRAM_ALGO_U) || '' }}${{ github.event.inputs.KPM == 'KPM' && '_KPM' || github.event.inputs.KPM == 'KPN' && '_KPN' || '' }}${{ github.event.inputs.LSM_BBG == 'true' && '_BBG' || '' }}_ILH${{ github.event.inputs.SCHED_HMBIRD== 'true' && '_HMBIRD' || '' }}${{ github.event.inputs.DROID_SPACES== 'true' && '_DS' || '' }}${{ github.event.inputs.RE_KERNEL == 'true' && '_REKER' || '' }}${{ github.event.inputs.LZ4_UPDATE == 'true' && '_LZ4UPD' || '' }}" >> $GITHUB_OUTPUT
 
+      - name: Set KernelSU Artifact Name
+        id: ksu_name
+        run: |
+          KSU_META="${{ github.event.inputs.KSU_META }}"
+          IFS='/' read -r BRANCH_NAME _ <<< "$KSU_META"
+          case "$BRANCH_NAME" in
+            kittisu)
+              NAME="KittiSU"
+              ;;
+            resuki)
+              NAME="ReSuKi"
+              ;;
+            next)
+              NAME="NextSU"
+              ;;
+            susfs-main|main|builtin|*)
+              NAME="SukiSUUltra"
+              ;;
+          esac
+          echo "value=$NAME" >> "$GITHUB_OUTPUT"
+
       - name: Upload AnyKernel3
         uses: actions/upload-artifact@v7
         with:
-          name: AnyKernel3_SukiSUUltra_${{ env.KSUVER }}_${{ steps.extract_info.outputs.value }}(${{ env.TKERNEL_VERSION }})${{ steps.suffix.outputs.value }}
+          name: AnyKernel3_${{ steps.ksu_name.outputs.value }}_${{ env.KSUVER }}_${{ steps.extract_info.outputs.value }}(${{ env.TKERNEL_VERSION }})${{ steps.suffix.outputs.value }}
           path: ./AnyKernel3/*
 
       - name: Extract and Process ZRAM Module
