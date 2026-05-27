@@ -761,7 +761,15 @@ jobs:
           [[ -n "$CUSTOM_TAG" ]] && echo "自定义版本标识: $CUSTOM_TAG" || echo "自定义版本标识: 未启用"
           [[ -n "$MANUAL_HASH" ]] && echo "手动指定 hash: $MANUAL_HASH" || echo "手动指定 hash: 未启用"
 
-          curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/${MANAGER_BRANCH}/kernel/setup.sh" | bash -s "$BRANCH_NAME"
+          # KittiSU is a ReSuki-derived fork with its own setup script.
+          # Keep the existing SukiSU/ReSuki/NextSU path unchanged, but route
+          # KSU_META="kittisu/.../..." to the KittiSU installer.
+          if [[ "$BRANCH_NAME" == "kittisu" ]]; then
+            echo "启用 KittiSU 集成"
+            curl -LSs "https://raw.githubusercontent.com/terebiko/KittiSU/main/kernel/setup.sh" | bash
+          else
+            curl -LSs "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/${MANAGER_BRANCH}/kernel/setup.sh" | bash -s "$BRANCH_NAME"
+          fi
           cd ./KernelSU
 
           # 如果指定了手动 hash，就切换到该提交
