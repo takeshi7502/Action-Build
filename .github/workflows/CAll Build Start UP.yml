@@ -123,15 +123,15 @@ jobs:
           inputs: |
             {
               "FILE": "${{ matrix.file }}",
-              "SUSFS_CI": "NoN",
-              "KSU_META": "susfs-main/Numbersf/",
+              "SUSFS_CI": "N/A",
+              "KPM": "KPM",
+              "KSU_META": "main/builtin/Numbersf/",
               "BUILD_TIME": "F",
               "SUFFIX": "",
               "FAST_BUILD": "true",
-              "HOOK": "manual",
-              "LSM": "true",
-              "SCHED": "${{ matrix.enable_sched }}",
-              "ZRAM": "false"
+              "LSM_BBG": "true",
+              "SCHED_HMBIRD": "${{ matrix.enable_sched }}",
+              "ZRAM": "0/lz4kd/8589934592"
             }
 
       - name: Wait for Builds to Finish or Exit Early

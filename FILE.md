@@ -19,7 +19,9 @@ oneplus_open_b
 oneplus_nord_ce4_b
 oneplus_12_b
 oneplus_pad_go_2_b
+oneplus_turbo_6x_b
 oneplus_nord_ce4_lite_5g_b
+oneplus_nord_ce6_lite_b
 oneplus_turbo_6v
 oneplus_nord_4_b
 oneplus_ace_3v_b
@@ -49,6 +51,7 @@ oneplus_15
 oneplus_15t
 oneplus_pad_3_pro
 oneplus_pad_4
+oneplus_ace6_ultra
 realme_neo_8
 realme_neo6_se_b
 realme_gt_neo6_b
@@ -132,6 +135,7 @@ oneplus_pad_3
 oneplus_ace5_race
 oneplus_ace5_ultra
 realme_gt5_v
+realme_gt_neo5se_v
 realme_gt5pro_v
 realme_gt6_v
 realme_gt_neo6_v
